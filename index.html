@@ -53,6 +53,7 @@
             font-size: 2.8em;
             color: #fff;
             margin: 0;
+            cursor: pointer;
         }
 
         h2, h3, h4, p {
@@ -90,33 +91,49 @@
             transform: rotate(360deg);
         }
 
-        .input-section, .package-section, .bill-section, .clock-section {
+        .input-section, .welcome-section, .package-type-section, .package-section, .bill-section, .clock-section, .new-customer-section, .cctv-section, .form-section, .thank-you {
             margin: 30px 0;
             opacity: 0;
             transform: translateY(20px) scale(0.95);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .input-section.visible, .package-section.visible, .bill-section.visible, .clock-section.visible {
+        .input-section.visible, .welcome-section.visible, .package-type-section.visible, .package-section.visible, .bill-section.visible, .clock-section.visible, .new-customer-section.visible, .cctv-section.visible, .form-section.visible, .thank-you.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
 
-        input[type="text"] {
+        .input-section, .welcome-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--primary);
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .input-section h3, .welcome-section h3 {
+            margin-bottom: 15px;
+            color: var(--vivid-orange);
+        }
+
+        input[type="text"], input[type="tel"], input[type="password"] {
             padding: 12px;
             font-size: 16px;
-            width: 220px;
+            width: 100%;
+            max-width: 300px;
             border: 2px solid var(--primary);
             border-radius: 8px;
             background: var(--card-bg);
             color: var(--text);
             transition: border-color 0.3s;
             text-align: center;
-            margin: 5px;
+            margin: 10px 0;
             box-sizing: border-box;
         }
 
-        input[type="text"]:focus {
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="password"]:focus {
             border-color: var(--secondary);
             outline: none;
         }
@@ -144,7 +161,7 @@
             outline-offset: 2px;
         }
 
-        .package-button {
+        .package-button, .plan-button {
             background: var(--vivid-orange);
             border: none;
             padding: 15px;
@@ -160,18 +177,14 @@
             margin: 10px;
         }
 
-        .package-button:hover {
+        .package-button:hover, .plan-button:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             animation: pulse 0.5s infinite;
         }
 
-        .package-button:active {
+        .package-button:active, .plan-button:active {
             animation: bubble 0.4s ease;
-        }
-
-        :root .package-button, [data-theme="dark"] .package-button {
-            color: #fff;
         }
 
         .price-highlight {
@@ -210,12 +223,39 @@
             display: inline-block;
             aria-live: polite;
         }
-      #popupQrCode {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    animation: smoothZoomIn 0.8s ease;
-      }
+
+        .cctv-section ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cctv-section ul li {
+            margin: 10px 0;
+        }
+
+        .form-section input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        .thank-you {
+            display: none;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .thank-you.visible {
+            display: block;
+        }
 
         @media (min-width: 601px) {
             .clock-section {
@@ -230,14 +270,60 @@
         }
 
         @media (max-width: 600px) {
-            .clock-section {
-                max-width: 90%;
-                margin: 10px auto;
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+                font-size: 1rem;
+            }
+
+            input[type="text"], input[type="tel"], input[type="password"] {
+                width: 90%;
+                font-size: 0.9rem;
                 padding: 8px;
             }
-            .clock-display {
-                font-size: clamp(0.8rem, 4vw, 1rem);
-                padding: 6px;
+
+            button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+
+            .package-button, .plan-button {
+                font-size: 0.85rem;
+                padding: 10px;
+                width: 90%;
+            }
+
+            .price-highlight {
+                font-size: 1.1em;
+            }
+
+            .cctv-section ul {
+                max-width: 90%;
+            }
+
+            .input-section, .welcome-section {
+                max-width: 90%;
             }
         }
 
@@ -256,32 +342,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.03); }
             100% { transform: scale(1); }
-        }
-
-        @keyframes smoothZoomIn {
-            from { transform: scale(0) rotate(0deg); }
-            to { transform: scale(1) rotate(360deg); }
-        }
-
-        @keyframes smoothPopIn {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            70% { transform: translate(-50%, -50%) scale(1.05); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .bill-section {
-            display: none; /* Hidden by default, can be shown if needed */
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        #qrCode {
-            margin-top: 20px;
-            animation: smoothZoomIn 0.8s ease;
-            display: flex;
-            justify-content: center;
         }
 
         .popup {
@@ -367,133 +427,170 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+      #qrCode, #popupQrCode {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+    }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: clamp(1.5rem, 5vw, 2rem);
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            h3 {
-                font-size: 1rem;
-            }
-
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 6px;
-                font-size: 1rem;
-            }
-
-            input[type="text"] {
-                width: 90%;
-                font-size: 0.9rem;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
-
-            .package-button {
-                font-size: 0.85rem;
-                padding: 10px;
-                width: 90%;
-            }
-
-            .price-highlight {
-                font-size: 1.1em;
-            }
-
-            .bill-section {
-                padding: 15px;
-            }
-
-            #qrCode {
-                margin-top: 10px;
-            }
-
-            .popup {
-                padding: 15px;
-                width: 85%;
-            }
-
-            .popup h3 {
-                font-size: 1.2rem;
-            }
-
-            .popup p {
-                font-size: 0.9rem;
-            }
-
-            .scrolling-text {
-                font-size: 0.8rem;
-            }
-        }
+    a[href^="tel"] {
+        color: var(--primary);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    a[href^="tel"]:hover {
+        color: var(--secondary);
+    }
     </style>
 </head>
 <body>
     <button class="theme-toggle">🌙</button>
     <div class="container">
         <div class="title-section">
-            <h1>JAGADAMBA INTERNET SERVICE</h1>
+            <h1 id="homeTitle">JAGADAMBA INTERNET SERVICE</h1>
         </div>
         <div class="clock-section">
             <div id="clock" class="clock-display"></div>
         </div>
         <h3>near Govt School, Mamidipally Village</h3>
-        <h3>Customer Service: 9133550086</h3>
+        <h3>Customer Service: <a href="tel:9133550086">9133550086</a></h3>
 
-        <div class="input-section">
-            <h3>Verify Customer</h3>
+        <div class="input-section visible" id="inputSection">
+            <h3>Customer Login</h3>
             <input type="text" id="mobile" placeholder="Enter Mobile Number" maxlength="10">
             <button onclick="verifyCustomer()">Submit</button>
         </div>
 
-        <div class="package-section" id="packageSection" style="display: none;">
-            <h2>Welcome, <span id="customerName"></span>!</h2>
-            <h3>Select Your Package</h3>
-            <div>
-                <h4>Internet Packages (Monthly)</h4>
-                <button class="package-button" onclick="selectPackage('Internet', '40MBPS', 499, 1)">40MBPS @ <span class="price-highlight">₹499</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '50MBPS', 599, 1)">50MBPS @ <span class="price-highlight">₹599</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '100MBPS', 899, 1)">75MBPS @ <span class="price-highlight">₹899</span></button>
-                <h4>Internet Packages (3 Months)</h4>
-                <button class="package-button" onclick="selectPackage('Internet', '40MBPS', 499*3, 3)">40MBPS @ <span class="price-highlight">₹1499</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '50MBPS', 599*3, 3)">50MBPS @ <span class="price-highlight">₹1799</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '100MBPS', 899*3, 3)">75MBPS @ <span class="price-highlight">₹2699</span></button>
-                <h4>Internet Packages (6 Months)</h4>
-                <button class="package-button" onclick="selectPackage('Internet', '40MBPS', 499*6, 6)">40MBPS @ <span class="price-highlight">₹2999</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '50MBPS', 599*6, 6)">50MBPS @ <span class="price-highlight">₹3599</span></button>
-                <button class="package-button" onclick="selectPackage('Internet', '100MBPS', 899*6, 6)">75MBPS @ <span class="price-highlight">₹5399</span></button>
-                <h4>OTT Packages (Monthly)</h4>
-                <button class="package-button" onclick="selectPackage('OTT', 'Standard 40MBPS', 599, 1)">Standard 40MBPS @ <span class="price-highlight">₹599</span><br>(JioHotstar, Zee5, ETV, Discovery+, FTA, 10+ OTTs)</button>
-                <button class="package-button" onclick="selectPackage('OTT', 'Storm 40MBPS', 699, 1)">Storm 40MBPS @ <span class="price-highlight">₹699</span><br>(JioHotstar, Zee5, Sony LIV, SUN NXT, AHA, ETV, Discovery+, FTA, 13+ OTTs)</button>
-                <h4>OTT Packages (3 Months)</h4>
-                <button class="package-button" onclick="selectPackage('OTT', 'Standard 40MBPS', 599*3, 3)">Standard 40MBPS @ <span class="price-highlight">₹1799</span></button>
-                <button class="package-button" onclick="selectPackage('OTT', 'Storm 40MBPS', 699*3, 3)">Storm 40MBPS @ <span class="price-highlight">₹2099</span></button>
-                <h4>OTT Packages (6 Months)</h4>
-                <button class="package-button" onclick="selectPackage('OTT', 'Standard 40MBPS', 599*6, 6)">Standard 40MBPS @ <span class="price-highlight">₹3599</span></button>
-                <button class="package-button" onclick="selectPackage('OTT', 'Storm 40MBPS', 699*6, 6)">Storm 40MBPS @ <span class="price-highlight">₹4199</span></button>
-            </div>
+        <div class="welcome-section" id="welcomeSection" style="display: none;">
+            <h3>Welcome, <span id="welcomeCustomerName"></span>!</h3>
+            <button onclick="proceedToPackageType()">Continue</button>
+            <button onclick="backToInput()">Back</button>
         </div>
 
-        <div class="bill-section" id="billSection">
+        <div class="new-customer-section" id="newCustomerSection" style="display: none;">
+            <h3>Welcome, New Customer!</h3>
+            <p>Please enter your name to proceed.</p>
+            <input type="text" id="newCustomerName" placeholder="Your Name" required>
+            <button onclick="registerNewCustomer()">Continue</button>
+            <button onclick="backToInput()">Back</button>
+        </div>
+
+        <div class="package-type-section" id="packageTypeSection" style="display: none;">
+            <h3>Select Package Type</h3>
+            <button class="package-button" onclick="showInternetPackages()">Internet Packs</button>
+            <button class="package-button" onclick="showCCTVPackages()">CCTV Packs</button>
+            <button onclick="backToPrevious()">Back</button>
+        </div>
+
+        <div class="package-section" id="internetPackageSection" style="display: none;">
+            <h3>Select Your Internet Package</h3>
+            <div>
+                <h4>Internet Packages (Monthly)</h4>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '40MBPS', 499, 1)">40MBPS @ <span class="price-highlight">₹499</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '50MBPS', 599, 1)">50MBPS @ <span class="price-highlight">₹599</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '100MBPS', 899, 1)">100MBPS @ <span class="price-highlight">₹899</span></button>
+                <h4>Internet Packages (3 Months)</h4>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '40MBPS', 499*3, 3)">40MBPS @ <span class="price-highlight">₹1499</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '50MBPS', 599*3, 3)">50MBPS @ <span class="price-highlight">₹1799</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '100MBPS', 899*3, 3)">100MBPS @ <span class="price-highlight">₹2699</span></button>
+                <h4>Internet Packages (6 Months)</h4>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '40MBPS', 499*6, 6)">40MBPS @ <span class="price-highlight">₹2999</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '50MBPS', 599*6, 6)">50MBPS @ <span class="price-highlight">₹3599</span></button>
+                <button class="package-button" onclick="selectInternetPackage('Internet', '100MBPS', 899*6, 6)">100MBPS @ <span class="price-highlight">₹5399</span></button>
+                <h4>OTT Packages (Monthly)</h4>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Standard 40MBPS', 599, 1)">Standard 40MBPS @ <span class="price-highlight">₹599</span><br>(JioHotstar, Zee5, ETV, Discovery+, FTA, 10+ OTTs)</button>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Storm 40MBPS', 699, 1)">Storm 40MBPS @ <span class="price-highlight">₹699</span><br>(JioHotstar, Zee5, Sony LIV, SUN NXT, AHA, ETV, Discovery+, FTA, 13+ OTTs)</button>
+                <h4>OTT Packages (3 Months)</h4>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Standard 40MBPS', 599*3, 3)">Standard 40MBPS @ <span class="price-highlight">₹1799</span></button>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Storm 40MBPS', 699*3, 3)">Storm 40MBPS @ <span class="price-highlight">₹2099</span></button>
+                <h4>OTT Packages (6 Months)</h4>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Standard 40MBPS', 599*6, 6)">Standard 40MBPS @ <span class="price-highlight">₹3599</span></button>
+                <button class="package-button" onclick="selectInternetPackage('OTT', 'Storm 40MBPS', 699*6, 6)">Storm 40MBPS @ <span class="price-highlight">₹4199</span></button>
+            </div>
+            <button onclick="backToPackageType()">Back</button>
+        </div>
+
+        <div class="cctv-section" id="cctvPackageSection" style="display: none;">
+            <h3>Choose Your CCTV Plan</h3>
+            <div class="plan-buttons">
+                <button class="plan-button" onclick="showCCTVPlan('ip')">IP Cameras</button>
+                <button class="plan-button" onclick="showCCTVPlan('standard')">Standard</button>
+                <button class="plan-button" onclick="showCCTVPlan('basic')">Basic</button>
+            </div>
+
+            <div id="ip" class="cctv-plan-details" style="display: none;">
+                <h2>IP Cameras Plan - Approx ₹36,000/-</h2>
+                <ul>
+                    <li>4ch NVR</li>
+                    <li>4MP IP Cameras with Mic (4 Cameras)</li>
+                    <li>2TB Hard Disk (1 Month Backup)</li>
+                    <li>Rack</li>
+                    <li>POE Switch</li>
+                    <li>Cat 6 Wire</li>
+                    <li>5x5 Camera Box</li>
+                    <li>Spike</li>
+                    <li><strong>Installation within 24-48 Hours</strong></li>
+                </ul>
+                <button class="package-button" onclick="selectCCTVPlan('IP Cameras', 36000)">Select Plan</button>
+            </div>
+
+            <div id="standard" class="cctv-plan-details" style="display: none;">
+                <h2>Standard Plan - Approx ₹23,000/-</h2>
+                <ul>
+                    <li>4ch DVR (5MP)</li>
+                    <li>5MP HD Guard+ with Mic (4 Cameras)</li>
+                    <li>1TB Hard Disk</li>
+                    <li>Rack</li>
+                    <li>SMPS Power Supply</li>
+                    <li>3+1 Coaxial Wire</li>
+                    <li>5x5 Camera Box</li>
+                    <li>Spike</li>
+                    <li><strong>Installation within 24-48 Hours</strong></li>
+                </ul>
+                <button class="package-button" onclick="selectCCTVPlan('Standard', 23000)">Select Plan</button>
+            </div>
+
+            <div id="basic" class="cctv-plan-details" style="display: none;">
+                <h2>Basic Plan - Approx ₹19,000/-</h2>
+                <ul>
+                    <li>4ch DVR</li>
+                    <li>3MP HD Guard+ with Mic (4 Cameras)</li>
+                    <li>1TB Hard Disk</li>
+                    <li>Rack</li>
+                    <li>SMPS Power Supply</li>
+                    <li>3+1 Coaxial Wire</li>
+                    <li>5x5 Camera Box</li>
+                    <li>Spike</li>
+                    <li><strong>Installation within 24-48 Hours</strong></li>
+                </ul>
+                <button class="package-button" onclick="selectCCTVPlan('Basic', 19000)">Select Plan</button>
+            </div>
+            <button onclick="backToPackageType()">Back</button>
+        </div>
+
+        <div class="form-section" id="formSection" style="display: none;">
+            <h2>Confirm Your Details</h2>
+            <input type="text" id="formCustomerName" placeholder="Your Name" readonly>
+            <input type="tel" id="formCustomerNumber" placeholder="Your Mobile Number" readonly>
+            <input type="hidden" id="selectedPackageType">
+            <input type="hidden" id="selectedPackageDetails">
+            <input type="hidden" id="selectedPackagePrice">
+            <button onclick="submitBooking()">Confirm</button>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <div class="thank-you" id="thankYouSection" style="display: none;">
+            <h2>Thank You, <span id="thankYouName"></span>!</h2>
+            <p>Your booking for the <span id="thankYouPackage"></span> has been received. We will contact you soon.</p>
+            <p>Redirecting to homepage in 10 seconds...</p>
+        </div>
+
+        <div class="bill-section" id="billSection" style="display: none;">
             <h2>Bill Summary</h2>
             <p><strong>Package:</strong> <span id="billPackage"></span></p>
             <p><strong>Base Fare:</strong> ₹<span id="baseFare"></span></p>
+            <p><strong>Router & Service Charges (if applicable):</strong> ₹<span id="routerCharges">0</span></p>
             <p><strong>GST (18%):</strong> ₹<span id="gst"></span></p>
             <p><strong>Total Fare:</strong> ₹<span id="totalFare" class="total-highlight"></span></p>
             <div id="qrCode"></div>
@@ -507,18 +604,11 @@
     </div>
 
     <div class="overlay" id="popupOverlay"></div>
-    <div class="popup" id="cctvPopup">
-        <h3>CCTV Installation Services</h3>
-        <p>CCTV cameras Installation Done At best prices. For Installation and services, do call us on:</p>
-        <p><strong>9133550086 (Pavan)</strong></p>
-        <p><strong>8897105036 (Durga)</strong></p>
-        <button onclick="closePopup()">Close</button>
-    </div>
-
     <div class="popup" id="paymentPopup">
         <h3>Payment Details</h3>
         <p><strong>Package:</strong> <span id="popupBillPackage"></span></p>
         <p><strong>Base Fare:</strong> ₹<span id="popupBaseFare"></span></p>
+        <p><strong>Router & Service Charges (if applicable):</strong> ₹<span id="popupRouterCharges"></span></p>
         <p><strong>GST (18%):</strong> ₹<span id="popupGst"></span></p>
         <p><strong>Total Fare:</strong> ₹<span id="popupTotalFare" class="total-highlight"></span></p>
         <div id="popupQrCode"></div>
@@ -530,7 +620,11 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        emailjs.init({ publicKey: "fBiz6kWckpnr-KrRk" });
+
         // Hardcoded customer list
         const customers = [
             { "mobile": "9133550086", "name": "k.pavan" },
@@ -607,20 +701,19 @@
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
             const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12; // Convert to 12-hour format
+            hours = hours % 12 || 12;
             hours = hours.toString().padStart(2, '0');
             const day = now.toLocaleDateString('en-US', { weekday: 'long' });
             const date = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
             const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
             const clockDisplay = `${timeString} | ${day}, ${date}`;
-            
             document.getElementById('clock').textContent = clockDisplay;
         }
 
         // Automatic theme switching based on time
         function setThemeBasedOnTime() {
             const hour = new Date().getHours();
-            const isEvening = hour >= 18 || hour < 6; // Dark mode from 6 PM to 6 AM
+            const isEvening = hour >= 18 || hour < 6;
             const newTheme = isEvening ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
@@ -646,7 +739,7 @@
 
         // Scroll-triggered animations
         function handleScroll() {
-            const elements = document.querySelectorAll('.input-section, .package-section, .bill-section, .clock-section');
+            const elements = document.querySelectorAll('.input-section, .welcome-section, .package-type-section, .package-section, .bill-section, .clock-section, .new-customer-section, .cctv-section, .form-section, .thank-you');
             elements.forEach(el => {
                 const rect = el.getBoundingClientRect();
                 if (rect.top <= window.innerHeight * 0.8) {
@@ -664,11 +757,23 @@
             document.getElementById('loading').style.display = 'none';
         }
 
+        // Reset to homepage
+        function resetToHomePage() {
+            document.querySelectorAll('.input-section, .welcome-section, .package-type-section, .package-section, .bill-section, .new-customer-section, .cctv-section, .form-section, .thank-you').forEach(el => {
+                el.style.display = 'none';
+                el.classList.remove('visible');
+            });
+            document.getElementById('mobile').value = '';
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('inputSection').classList.add('visible');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         // Verify customer
         function verifyCustomer() {
             showLoading();
             setTimeout(() => {
-                const mobile = document.getElementById('mobile').value;
+                const mobile = document.getElementById('mobile').value.trim();
                 if (mobile.length !== 10 || isNaN(mobile)) {
                     hideLoading();
                     alert('Please enter a valid 10-digit mobile number.');
@@ -679,65 +784,423 @@
                 hideLoading();
 
                 if (customer) {
-                    document.getElementById('customerName').innerText = customer.name;
-                    document.getElementById('packageSection').style.display = 'block';
-                    document.getElementById('packageSection').classList.add('visible');
-                    document.getElementById('billSection').style.display = 'none';
-                    showPopup();
+                    // Existing customer
+                    document.getElementById('welcomeCustomerName').innerText = customer.name;
+                    document.getElementById('formCustomerName').value = customer.name;
+                    document.getElementById('formCustomerNumber').value = mobile;
+
+                    // Hide input section
+                    document.getElementById('inputSection').style.display = 'none';
+                    document.getElementById('inputSection').classList.remove('visible');
+
+                    // Show welcome section
+                    document.getElementById('welcomeSection').style.display = 'block';
+                    document.getElementById('welcomeSection').classList.add('visible');
+
+                    // Ensure other sections are hidden
+                    document.getElementById('newCustomerSection').style.display = 'none';
+                    document.getElementById('newCustomerSection').classList.remove('visible');
+                    document.getElementById('packageTypeSection').style.display = 'none';
+                    document.getElementById('packageTypeSection').classList.remove('visible');
+                    document.getElementById('internetPackageSection').style.display = 'none';
+                    document.getElementById('internetPackageSection').classList.remove('visible');
+                    document.getElementById('cctvPackageSection').style.display = 'none';
+                    document.getElementById('cctvPackageSection').classList.remove('visible');
+                    document.getElementById('formSection').style.display = 'none';
+                    document.getElementById('formSection').classList.remove('visible');
+                    document.getElementById('thankYouSection').style.display = 'none';
+                    document.getElementById('thankYouSection').classList.remove('visible');
+
+                    window.scrollTo({ top: document.getElementById('welcomeSection').offsetTop, behavior: 'smooth' });
                 } else {
-                    alert('Mobile number not found in customer list.');
+                    // New customer
+                    document.getElementById('formCustomerNumber').value = mobile;
+                    document.getElementById('inputSection').style.display = 'none';
+                    document.getElementById('inputSection').classList.remove('visible');
+                    document.getElementById('newCustomerSection').style.display = 'block';
+                    document.getElementById('newCustomerSection').classList.add('visible');
+                    document.getElementById('welcomeSection').style.display = 'none';
+                    document.getElementById('welcomeSection').classList.remove('visible');
+                    document.getElementById('packageTypeSection').style.display = 'none';
+                    document.getElementById('packageTypeSection').classList.remove('visible');
+                    document.getElementById('internetPackageSection').style.display = 'none';
+                    document.getElementById('internetPackageSection').classList.remove('visible');
+                    document.getElementById('cctvPackageSection').style.display = 'none';
+                    document.getElementById('cctvPackageSection').classList.remove('visible');
+                    document.getElementById('formSection').style.display = 'none';
+                    document.getElementById('formSection').classList.remove('visible');
+                    document.getElementById('thankYouSection').style.display = 'none';
+                    document.getElementById('thankYouSection').classList.remove('visible');
+                    window.scrollTo({ top: document.getElementById('newCustomerSection').offsetTop, behavior: 'smooth' });
                 }
             }, 800);
         }
 
-        // Select package and show payment popup
-        function selectPackage(type, name, baseFare, months) {
+        // Back to input section
+        function backToInput() {
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('inputSection').classList.add('visible');
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('inputSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Proceed to package type selection
+        function proceedToPackageType() {
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('packageTypeSection').style.display = 'block';
+            document.getElementById('packageTypeSection').classList.add('visible');
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('packageTypeSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Back to previous section (for package type section)
+        function backToPrevious() {
+            const isNewCustomer = !customers.find(c => c.mobile === document.getElementById('formCustomerNumber').value);
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            if (isNewCustomer) {
+                document.getElementById('newCustomerSection').style.display = 'block';
+                document.getElementById('newCustomerSection').classList.add('visible');
+            } else {
+                document.getElementById('welcomeSection').style.display = 'block';
+                document.getElementById('welcomeSection').classList.add('visible');
+            }
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: isNewCustomer ? document.getElementById('newCustomerSection').offsetTop : document.getElementById('welcomeSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Register new customer
+        function registerNewCustomer() {
+            const name = document.getElementById('newCustomerName').value.trim();
+            if (!name) {
+                alert('Please enter your name.');
+                return;
+            }
+
+            document.getElementById('formCustomerName').value = name;
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('packageTypeSection').style.display = 'block';
+            document.getElementById('packageTypeSection').classList.add('visible');
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('packageTypeSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Back to package type section
+        function backToPackageType() {
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('packageTypeSection').style.display = 'block';
+            document.getElementById('packageTypeSection').classList.add('visible');
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('packageTypeSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Show package sections
+        function showInternetPackages() {
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'block';
+            document.getElementById('internetPackageSection').classList.add('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('internetPackageSection').offsetTop, behavior: 'smooth' });
+        }
+
+        function showCCTVPackages() {
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'block';
+            document.getElementById('cctvPackageSection').classList.add('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('cctvPackageSection').offsetTop, behavior: 'smooth' });
+        }
+
+        // Show CCTV plan details
+        function showCCTVPlan(plan) {
+            document.querySelectorAll('.cctv-plan-details').forEach(el => {
+                el.style.display = 'none';
+                el.classList.remove('visible');
+            });
+            document.getElementById(plan).style.display = 'block';
+            document.getElementById(plan).classList.add('visible');
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById(plan).offsetTop, behavior: 'smooth' });
+        }
+
+        // Select Internet Package
+        function selectInternetPackage(type, name, baseFare, months) {
             showLoading();
             setTimeout(() => {
                 hideLoading();
-                const gst = baseFare * 0.18;
-                const totalFare = baseFare + gst;
+                const isNewCustomer = !customers.find(c => c.mobile === document.getElementById('formCustomerNumber').value);
+                const routerCharges = isNewCustomer ? 2500 : 0;
+                const totalBaseFare = baseFare + routerCharges;
+                const gst = totalBaseFare * 0.18;
+                const totalFare = totalBaseFare + gst;
 
-                // Update bill section (hidden by default)
+                // Update bill section
                 document.getElementById('billPackage').innerText = `${type} - ${name} (${months} Month${months > 1 ? 's' : ''})`;
                 document.getElementById('baseFare').innerText = baseFare.toFixed(2);
+                document.getElementById('routerCharges').innerText = routerCharges.toFixed(2);
                 document.getElementById('gst').innerText = gst.toFixed(2);
                 document.getElementById('totalFare').innerText = totalFare.toFixed(2);
 
                 // Update payment popup
                 document.getElementById('popupBillPackage').innerText = `${type} - ${name} (${months} Month${months > 1 ? 's' : ''})`;
                 document.getElementById('popupBaseFare').innerText = baseFare.toFixed(2);
+                document.getElementById('popupRouterCharges').innerText = routerCharges.toFixed(2);
                 document.getElementById('popupGst').innerText = gst.toFixed(2);
                 document.getElementById('popupTotalFare').innerText = totalFare.toFixed(2);
 
-                // Generate UPI QR Code in popup
-                const upiId = '9133550086@upi';
+                // Generate UPI QR Code
+                const upiId = '9133550086-2@ybl';
                 const upiUrl = `upi://pay?pa=${upiId}&pn=JAGADAMBA&am=${totalFare.toFixed(2)}&cu=INR`;
                 document.getElementById('popupQrCode').innerHTML = '';
                 new QRCode(document.getElementById('popupQrCode'), {
                     text: upiUrl,
                     width: 200,
-                    height: 200   
+                    height: 200
                 });
+              
 
-                // Show payment popup
+                // Store package details for form submission
+                document.getElementById('selectedPackageType').value = 'Internet';
+                document.getElementById('selectedPackageDetails').value = `${type} - ${name} (${months} Month${months > 1 ? 's' : ''})`;
+                document.getElementById('selectedPackagePrice').value = totalFare.toFixed(2);
+
+                // Show form section
+                document.getElementById('internetPackageSection').style.display = 'none';
+                document.getElementById('internetPackageSection').classList.remove('visible');
+                document.getElementById('formSection').style.display = 'block';
+                document.getElementById('formSection').classList.add('visible');
                 document.getElementById('paymentPopup').style.display = 'block';
                 document.getElementById('popupOverlay').style.display = 'block';
+                document.getElementById('inputSection').style.display = 'none';
+                document.getElementById('inputSection').classList.remove('visible');
+                document.getElementById('welcomeSection').style.display = 'none';
+                document.getElementById('welcomeSection').classList.remove('visible');
+                document.getElementById('newCustomerSection').style.display = 'none';
+                document.getElementById('newCustomerSection').classList.remove('visible');
+                document.getElementById('packageTypeSection').style.display = 'none';
+                document.getElementById('packageTypeSection').classList.remove('visible');
+                document.getElementById('cctvPackageSection').style.display = 'none';
+                document.getElementById('cctvPackageSection').classList.remove('visible');
+                document.getElementById('thankYouSection').style.display = 'none';
+                document.getElementById('thankYouSection').classList.remove('visible');
+                window.scrollTo({ top: document.getElementById('formSection').offsetTop, behavior: 'smooth' });
             }, 800);
         }
 
-        // Popup controls for CCTV popup
-        function showPopup() {
-            document.getElementById('cctvPopup').style.display = 'block';
-            document.getElementById('popupOverlay').style.display = 'block';
+        // Select CCTV Plan
+        function selectCCTVPlan(plan, price) {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                document.getElementById('selectedPackageType').value = 'CCTV';
+                document.getElementById('selectedPackageDetails').value = `${plan} Plan`;
+                document.getElementById('selectedPackagePrice').value = price.toFixed(2);
+
+                // Show form section
+                document.getElementById('cctvPackageSection').style.display = 'none';
+                document.getElementById('cctvPackageSection').classList.remove('visible');
+                document.getElementById('formSection').style.display = 'block';
+                document.getElementById('formSection').classList.add('visible');
+                document.getElementById('inputSection').style.display = 'none';
+                document.getElementById('inputSection').classList.remove('visible');
+                document.getElementById('welcomeSection').style.display = 'none';
+                document.getElementById('welcomeSection').classList.remove('visible');
+                document.getElementById('newCustomerSection').style.display = 'none';
+                document.getElementById('newCustomerSection').classList.remove('visible');
+                document.getElementById('packageTypeSection').style.display = 'none';
+                document.getElementById('packageTypeSection').classList.remove('visible');
+                document.getElementById('internetPackageSection').style.display = 'none';
+                document.getElementById('internetPackageSection').classList.remove('visible');
+                document.getElementById('thankYouSection').style.display = 'none';
+                document.getElementById('thankYouSection').classList.remove('visible');
+                window.scrollTo({ top: document.getElementById('formSection').offsetTop, behavior: 'smooth' });
+            }, 800);
         }
 
-        function closePopup() {
-            document.getElementById('cctvPopup').style.display = 'none';
+        // Go back to previous package selection
+        function goBack() {
+            const packageType = document.getElementById('selectedPackageType').value;
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('paymentPopup').style.display = 'none';
             document.getElementById('popupOverlay').style.display = 'none';
+
+            if (packageType === 'Internet') {
+                document.getElementById('internetPackageSection').style.display = 'block';
+                document.getElementById('internetPackageSection').classList.add('visible');
+                window.scrollTo({ top: document.getElementById('internetPackageSection').offsetTop, behavior: 'smooth' });
+            } else if (packageType === 'CCTV') {
+                document.getElementById('cctvPackageSection').style.display = 'block';
+                document.getElementById('cctvPackageSection').classList.add('visible');
+                window.scrollTo({ top: document.getElementById('cctvPackageSection').offsetTop, behavior: 'smooth' });
+            }
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            document.getElementById('thankYouSection').style.display = 'none';
+            document.getElementById('thankYouSection').classList.remove('visible');
         }
 
-        // Popup controls for payment popup
+        // Submit booking
+        function submitBooking() {
+            const name = document.getElementById('formCustomerName').value;
+            const number = document.getElementById('formCustomerNumber').value;
+            const packageType = document.getElementById('selectedPackageType').value;
+            const packageDetails = document.getElementById('selectedPackageDetails').value;
+            const price = document.getElementById('selectedPackagePrice').value;
+            const isNewCustomer = !customers.find(c => c.mobile === number);
+
+            if (!name || !number) {
+                alert('Please ensure all fields are filled.');
+                return;
+            }
+
+            // Prepare email content
+            const emailContent = `
+                New ${packageType} Booking:
+                Customer Name: ${name}
+                Mobile Number: ${number}
+                Package: ${packageDetails}
+                Price: ₹${price}/-
+                ${packageType === 'CCTV' ? 'Installation: Within 24-48 Hours' : ''}
+                ${isNewCustomer ? 'Customer Type: New' : 'Customer Type: Existing'}
+            `;
+
+            // Show thank you message
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('formSection').classList.remove('visible');
+            document.getElementById('paymentPopup').style.display = 'none';
+            document.getElementById('popupOverlay').style.display = 'none';
+            document.getElementById('thankYouSection').style.display = 'block';
+            document.getElementById('thankYouSection').classList.add('visible');
+            document.getElementById('thankYouName').textContent = name;
+            document.getElementById('thankYouPackage').textContent = packageDetails;
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inputSection').classList.remove('visible');
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('welcomeSection').classList.remove('visible');
+            document.getElementById('newCustomerSection').style.display = 'none';
+            document.getElementById('newCustomerSection').classList.remove('visible');
+            document.getElementById('packageTypeSection').style.display = 'none';
+            document.getElementById('packageTypeSection').classList.remove('visible');
+            document.getElementById('internetPackageSection').style.display = 'none';
+            document.getElementById('internetPackageSection').classList.remove('visible');
+            document.getElementById('cctvPackageSection').style.display = 'none';
+            document.getElementById('cctvPackageSection').classList.remove('visible');
+            window.scrollTo({ top: document.getElementById('thankYouSection').offsetTop, behavior: 'smooth' });
+
+            // Send email for all bookings
+            emailjs.send("service_ofnw1zi", "template_0th99ai", {
+                to_email: "Pavanroyal040@gmail.com",
+                message: emailContent,
+                customer_name: name,
+                package: packageDetails
+            }).then(() => {
+                // Redirect to homepage after 10 seconds
+                setTimeout(() => {
+                    resetToHomePage();
+                }, 10000);
+            }).catch(error => {
+                alert('Failed to send booking. Please try again.');
+                console.error('EmailJS error:', error);
+                // Still redirect to homepage after 10 seconds
+                setTimeout(() => {
+                    resetToHomePage();
+                }, 10000);
+            });
+        }
+
+        // Popup controls
         function closePaymentPopup() {
             document.getElementById('paymentPopup').style.display = 'none';
             document.getElementById('popupOverlay').style.display = 'none';
@@ -747,13 +1210,15 @@
         function initialize() {
             initializeTheme();
             updateClock();
-            setInterval(updateClock, 1000); // Update clock every second
+            setInterval(updateClock, 1000);
             document.querySelector('.clock-section').classList.add('visible');
+            document.querySelector('.input-section').classList.add('visible');
             window.addEventListener('scroll', handleScroll);
             handleScroll();
+            document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+            document.getElementById('homeTitle').addEventListener('click', resetToHomePage);
         }
 
-        // Run on page load
         window.addEventListener('load', initialize);
     </script>
 </body>
